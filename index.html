@@ -1,563 +1,1526 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0b2a44" />
-  <title>Amiya Kumar Das • Full Stack Web Developer</title>
-  <style>
-    /* ====== Design Tokens ====== */
-    :root{
-      --bg:#071a2b;
-      --bg-elev:#0b2a44;
-      --text:#e6f2ff;
-      --muted:#a6c3e6;
-      --accent:#4dd0ff;
-      --accent-2:#7af1c7;
-      --glow:0 0 .5rem var(--accent), 0 0 1.25rem rgba(77,208,255,.35);
-      --radius:12px;
-      --shadow:0 4px 12px rgba(5,20,35,.25);
-    }
-
-    /* ====== Base Reset ====== */
-    *,*::before,*::after{box-sizing:border-box}
-    html,body{height:100%;margin:0;overflow:hidden}
-    body{
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
-      color:var(--text);
-      background: radial-gradient(800px 600px at 10% -10%, rgba(77,208,255,.06), transparent 50%),
-                  radial-gradient(600px 400px at 90% 20%, rgba(122,241,199,.06), transparent 50%),
-                  var(--bg);
-      line-height:1.5;
-      -webkit-font-smoothing:antialiased;
-    }
-    img{max-width:100%;display:block}
-    a{color:var(--accent);text-decoration:none}
-    a:hover{opacity:.8}
-    h1,h2,h3{line-height:1.2;margin:0 0 .5rem}
-    h2{font-size:1.4rem;letter-spacing:.3px}
-    h3{font-size:1.1rem}
-    p{margin:.3rem 0 .7rem}
-    ul{margin:.5rem 0;padding-left:1.2rem}
-    li{margin:.3rem 0}
-
-    /* ====== Layout Structure ====== */
-    .app{display:flex;height:100vh}
-    
-    /* Sidebar */
-    .sidebar{
-      width:280px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border-right:1px solid rgba(77,208,255,.15);
-      display:flex;
-      flex-direction:column;
-      overflow-y:auto;
-      scrollbar-width:none;
-      -ms-overflow-style:none;
-    }
-    
-    .sidebar::-webkit-scrollbar{
-      display:none;
-    }
-    
-    .profile-section{
-      padding:1.5rem 1rem;
-      border-bottom:1px solid rgba(77,208,255,.1);
-      text-align:center;
-    }
-    
-    .photo{
-      width:120px;
-      height:120px;
-      border-radius:var(--radius);
-      border:1px solid rgba(77,208,255,.25);
-      background:rgba(11,42,68,.4);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin:0 ;
-      font-size:.8rem;
-      color:var(--muted);
-      transition:all .3s ease;
-      cursor:pointer;
-      overflow: hidden;
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b2a44" />
+    <title>Amiya Kumar Das • Web Developer</title>
+    <style>
+      /* ====== Design Tokens ====== */
+      :root {
+        --bg: #071a2b;
+        --bg-elev: #0b2a44;
+        --text: #e6f2ff;
+        --muted: #a6c3e6;
+        --accent: #4dd0ff;
+        --accent-2: #7af1c7;
+        --glow: 0 0 0.5rem var(--accent), 0 0 1.25rem rgba(77, 208, 255, 0.35);
+        --radius: 12px;
+        --shadow: 0 4px 12px rgba(5, 20, 35, 0.25);
       }
-    .photo-img {
+
+      /* ====== Base Reset ====== */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+          "Helvetica Neue", Arial, "Noto Sans";
+        color: var(--text);
+        background: radial-gradient(
+            800px 600px at 10% -10%,
+            rgba(77, 208, 255, 0.06),
+            transparent 50%
+          ),
+          radial-gradient(
+            600px 400px at 90% 20%,
+            rgba(122, 241, 199, 0.06),
+            transparent 50%
+          ),
+          var(--bg);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        opacity: 0.8;
+      }
+      h1,
+      h2,
+      h3 {
+        line-height: 1.2;
+        margin: 0 0 0.5rem;
+      }
+      h2 {
+        font-size: 1.4rem;
+        letter-spacing: 0.3px;
+      }
+      h3 {
+        font-size: 1.1rem;
+      }
+      p {
+        margin: 0.3rem 0 0.7rem;
+      }
+      ul {
+        margin: 0.5rem 0;
+        padding-left: 1.2rem;
+      }
+      li {
+        margin: 0.3rem 0;
+      }
+
+      /* ====== Layout Structure ====== */
+      .app {
+        display: flex;
+        height: 100vh;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        width: 280px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.02)
+        );
+        border-right: 1px solid rgba(77, 208, 255, 0.15);
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .sidebar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .profile-section {
+        padding: 1.5rem 1rem;
+        border-bottom: 1px solid rgba(77, 208, 255, 0.1);
+        text-align: center;
+      }
+
+      .photo {
+        width: 120px;
+        height: 120px;
+        border-radius: var(--radius);
+        border: 1px solid rgba(77, 208, 255, 0.25);
+        background: rgba(11, 42, 68, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        font-size: 0.8rem;
+        color: var(--muted);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        overflow: hidden;
+      }
+      .photo-img {
         width: 120px;
         height: 120px;
         margin: 0;
         object-fit: cover;
       }
-    
-    .photo:hover{
-      border-color:rgba(77,208,255,.4);
-      box-shadow:0 0 .8rem rgba(77,208,255,.25);
-      transform:scale(1.05);
-    }
-    
-    .name{font-size:1.3rem;font-weight:700;margin-bottom:.3rem}
-    .role{color:var(--accent-2);font-weight:600;font-size:.95rem;margin-bottom:.8rem}
-    
-    .contact-info{
-      display:flex;
-      flex-direction:column;
-      gap:.4rem;
-      font-size:.85rem;
-    }
-    
-    .contact-item{
-      display:flex;
-      align-items:center;
-      gap:.5rem;
-      padding:.3rem .5rem;
-      border-radius:8px;
-      background:rgba(11,42,68,.3);
-      border:1px solid rgba(77,208,255,.15);
-      transition:all .25s ease;
-      cursor:pointer;
-    }
-    
-    .contact-item:hover{
-      background:rgba(77,208,255,.08);
-      border-color:rgba(77,208,255,.25);
-      transform:translateX(2px);
-    }
 
-    /* Navigation */
-    .nav-section{
-      padding:1rem;
-      flex:1;
-    }
-    
-    .nav-links{
-      display:flex;
-      flex-direction:column;
-      gap:.3rem;
-    }
-    
-    .nav-link{
-      padding:.6rem .8rem;
-      border-radius:8px;
-      border:1px solid transparent;
-      cursor:pointer;
-      transition:all .2s ease;
-    }
-    
-    .nav-link:hover{
-      background:rgba(77,208,255,.08);
-      border-color:rgba(77,208,255,.2);
-    }
-    
-    .nav-link.active{
-      background:rgba(122,241,199,.1);
-      border-color:rgba(122,241,199,.3);
-      color:var(--accent-2);
-    }
-
-    /* Main Content */
-    .main-content{
-      flex:1;
-      overflow-y:auto;
-      padding:2rem;
-    }
-    
-    .content-section{
-      display:none;
-    }
-    
-    .content-section.active{
-      display:block;
-      animation:fadeIn .3s ease;
-    }
-    
-    @keyframes fadeIn{
-      from{opacity:0;transform:translateY(10px)}
-      to{opacity:1;transform:translateY(0)}
-    }
-
-    /* Card Styles */
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border:1px solid rgba(77,208,255,.12);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:1.2rem;
-      margin-bottom:1rem;
-      transition:all .25s ease;
-    }
-    
-    .card:hover{
-      border-color:rgba(77,208,255,.2);
-      box-shadow:0 6px 16px rgba(5,20,35,.3);
-      transform:translateY(-1px);
-    }
-
-    /* Grid Layouts */
-    .grid{display:grid;gap:1rem}
-    .grid-2{grid-template-columns:repeat(2,1fr)}
-    .grid-3{grid-template-columns:repeat(3,1fr)}
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:.3rem;
-      padding:.25rem .5rem;
-      border-radius:999px;
-      border:1px solid rgba(77,208,255,.2);
-      background:rgba(11,42,68,.3);
-      margin:.2rem .2rem 0 0;
-      font-size:.8rem;
-    }
-
-    .section-title{
-      font-size:1.8rem;
-      margin-bottom:1.5rem;
-      color:var(--accent);
-    }
-
-    /* Summary specific */
-    .summary-text{
-      font-size:1.05rem;
-      line-height:1.6;
-    }
-
-    /* Skills grid */
-    .skill-category{
-      border-left:3px solid var(--accent-2);
-      padding-left:1rem;
-    }
-
-    /* Experience timeline */
-    .experience-item{
-      position:relative;
-      padding-left:1.5rem;
-    }
-    
-    /* Mobile Responsive */
-    @media (max-width:768px){
-      .app{flex-direction:column;height:100vh}
-      
-      .sidebar{
-        width:100%;
-        height:auto;
-        max-height:40vh;
-        border-right:none;
-        border-bottom:1px solid rgba(77,208,255,.15);
+      .photo:hover {
+        border-color: rgba(77, 208, 255, 0.4);
+        box-shadow: 0 0 0.8rem rgba(77, 208, 255, 0.25);
+        transform: scale(1.05);
       }
-      
-      .profile-section{
-        padding:1rem;
-        display:flex;
-        align-items:center;
-        gap:1rem;
-        text-align:left;
+
+      .name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
       }
-      
-      .photo{
-        width:80px;
-        height:80px;
-        margin:0;
-        flex-shrink:0;
+      .role {
+        color: var(--accent-2);
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        font-size: 0.85rem;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.3rem 0.5rem;
+        border-radius: 8px;
+        background: rgba(11, 42, 68, 0.3);
+        border: 1px solid rgba(77, 208, 255, 0.15);
+        transition: all 0.25s ease;
+        cursor: pointer;
+      }
+
+      .contact-item:hover {
+        background: rgba(77, 208, 255, 0.08);
+        border-color: rgba(77, 208, 255, 0.25);
+        transform: translateX(2px);
+      }
+
+      /* Navigation */
+      .nav-section {
+        padding: 1rem;
+        flex: 1;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+
+      .nav-link {
+        padding: 0.6rem 0.8rem;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .nav-link:hover {
+        background: rgba(77, 208, 255, 0.08);
+        border-color: rgba(77, 208, 255, 0.2);
+      }
+
+      .nav-link.active {
+        background: rgba(122, 241, 199, 0.1);
+        border-color: rgba(122, 241, 199, 0.3);
+        color: var(--accent-2);
+      }
+
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 2rem;
+        scrollbar-width: 0;
+        }
+        .main-content::-webkit-scrollbar{
+          display: none;
+          width: 0;
+      }
+
+      .content-section {
+        display: none;
+      }
+
+      .content-section.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Card Styles */
+      .card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.02)
+        );
+        border: 1px solid rgba(77, 208, 255, 0.12);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 1.2rem;
+        margin-bottom: 1rem;
+        transition: all 0.25s ease;
+      }
+
+      .card:hover {
+        border-color: rgba(77, 208, 255, 0.2);
+        box-shadow: 0 6px 16px rgba(5, 20, 35, 0.3);
+        transform: translateY(-1px);
+      }
+
+      /* Enhanced Summary Section */
+      .summary-hero {
+        background: linear-gradient(
+          135deg,
+          rgba(77, 208, 255, 0.08),
+          rgba(122, 241, 199, 0.05)
+        );
+        border: 1px solid rgba(77, 208, 255, 0.2);
+        border-radius: var(--radius);
+        padding: 2rem;
+        margin-bottom: 2rem;
+        position: relative;
         overflow: hidden;
       }
-      .photo-img {
-        width: 80px;
-        height: 80px;
+
+      .summary-hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        border-radius: var(--radius) var(--radius) 0 0;
+      }
+
+      .summary-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+      }
+
+      .summary-subtitle {
+        text-align: center;
+        font-size: 1.1rem;
+        color: var(--accent-2);
+        margin-bottom: 2rem;
+        font-weight: 600;
+      }
+
+      .summary-content {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .summary-highlight {
+        background: rgba(11, 42, 68, 0.4);
+        border: 1px solid rgba(77, 208, 255, 0.15);
+        border-radius: 10px;
+        padding: 1.5rem;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        position: relative;
+      }
+
+      .summary-highlight::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(180deg, var(--accent), var(--accent-2));
+        border-radius: 0 2px 2px 0;
+      }
+
+      .summary-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .stat-item {
+        text-align: center;
+        padding: 1rem;
+        background: rgba(11, 42, 68, 0.3);
+        border: 1px solid rgba(77, 208, 255, 0.1);
+        border-radius: 8px;
+      }
+
+      .stat-number {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--accent);
+        display: block;
+      }
+
+      .stat-label {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-top: 0.2rem;
+      }
+
+      /* Grid Layouts */
+      .grid {
+        display: grid;
+        gap: 1rem;
+      }
+      .grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 999px;
+        border: 1px solid rgba(77, 208, 255, 0.2);
+        background: rgba(11, 42, 68, 0.3);
+        margin: 0.2rem 0.2rem 0 0;
+        font-size: 0.8rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: var(--accent);
+      }
+
+      /* Skills grid */
+      .skill-category {
+        border-left: 3px solid var(--accent-2);
+        padding-left: 1rem;
+      }
+
+      /* Enhanced Experience Section */
+.experience-item {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(77, 208, 255, 0.12);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.experience-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.experience-item:hover {
+  border-color: rgba(77, 208, 255, 0.2);
+  box-shadow: 0 6px 16px rgba(5, 20, 35, 0.3);
+  transform: translateY(-1px);
+}
+
+.experience-item h3 {
+  color: var(--accent-2);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.experience-item .muted {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  padding: 0.3rem 0.8rem;
+  background: rgba(11, 42, 68, 0.3);
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.experience-item ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.experience-item li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+/* Enhanced Education Section */
+.education-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(77, 208, 255, 0.12);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.education-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.education-card:hover {
+  border-color: rgba(77, 208, 255, 0.2);
+  box-shadow: 0 6px 16px rgba(5, 20, 35, 0.3);
+  transform: translateY(-1px);
+}
+
+.education-card h3 {
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.education-card .muted {
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Enhanced Achievement Cards */
+.achievement-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 1px solid rgba(77, 208, 255, 0.12);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.achievement-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.achievement-card:hover {
+  border-color: rgba(77, 208, 255, 0.2);
+  box-shadow: 0 6px 16px rgba(5, 20, 35, 0.3);
+  transform: translateY(-1px);
+}
+
+.achievement-card:hover::before {
+  transform: scaleX(1);
+}
+
+.achievement-card h3 {
+  color: var(--accent-2);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.achievement-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.achievement-card li {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.achievement-card p.muted {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0.3rem 0 0.7rem;
+}
+
+      /* Enhanced Project Cards */
+      .project-card {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.02)
+        );
+        border: 1px solid rgba(77, 208, 255, 0.12);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 1.2rem;
+        margin-bottom: 1rem;
+        transition: all 0.25s ease;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+      }
+
+      .project-card:hover {
+        border-color: rgba(77, 208, 255, 0.3);
+        box-shadow: 0 8px 24px rgba(5, 20, 35, 0.4);
+        transform: translateY(-2px);
+      }
+
+      .project-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 0.8rem;
+        flex-wrap: wrap;
+      }
+
+      .project-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--accent-2);
+      }
+
+      .project-status {
+        text-wrap: nowrap;
+        padding: 0.2rem 0.6rem;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        background: rgba(122, 241, 199, 0.15);
+        color: var(--accent-2);
+        border: 1px solid rgba(122, 241, 199, 0.3);
+      }
+
+      .project-description {
+        color: var(--muted);
+        margin-bottom: 1rem;
+        line-height: 1.6;
+      }
+
+      .view-details {
+        color: var(--accent);
+        font-size: 0.85rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        margin-top: 0.5rem;
+        opacity: 0;
+        transform: translateY(5px);
+        transition: all 0.3s ease;
+      }
+
+      .project-card:hover .view-details {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Modal Styles */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(7, 26, 43, 0.85);
+        backdrop-filter: blur(8px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        padding: 1rem;
+      }
+
+      .modal-overlay.active {
+        display: flex;
+        animation: modalFadeIn 0.3s ease;
+      }
+
+      @keyframes modalFadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .modal-content {
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0.03)
+        );
+        border: 1px solid rgba(77, 208, 255, 0.2);
+        border-radius: var(--radius);
+        max-width: 800px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(5, 20, 35, 0.5);
+        animation: modalSlideIn 0.3s ease;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(77, 208, 255, 0.3) transparent;
+      }
+
+      .modal-content::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .modal-content::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .modal-content::-webkit-scrollbar-thumb {
+        background: rgba(77, 208, 255, 0.3);
+        border-radius: 3px;
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .modal-header {
+        padding: 1.5rem 2rem 1rem;
+        border-bottom: 1px solid rgba(77, 208, 255, 0.15);
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+
+      .modal-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--accent-2);
         margin: 0;
-        object-fit: cover;
       }
-      
-      .profile-info{flex:1}
-      .name{font-size:1.1rem}
-      .role{font-size:.85rem}
-      
-      .contact-info{
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:.3rem;
-        font-size:.75rem;
-      }
-      
-      .nav-section{
-        padding:.5rem 1rem;
-      }
-      
-      .nav-links{
-        flex-direction:row;
-        flex-wrap:wrap;
-        gap:.5rem;
-      }
-      
-      .nav-link{
-        padding:.4rem .6rem;
-        font-size:.85rem;
-      }
-      
-      .main-content{
-        padding:1rem;
-        flex:1;
-        overflow-y:auto;
-      }
-      
-      .grid-2,.grid-3{grid-template-columns:1fr}
-      .section-title{font-size:1.5rem}
-    }
 
-    @media (max-width:480px){
-      .contact-info{grid-template-columns:1fr}
-      .nav-links{justify-content:center}
-    }
+      .modal-close {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(77, 208, 255, 0.2);
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--muted);
+        transition: all 0.2s ease;
+        font-size: 1.2rem;
+      }
 
-    /* Reduce motion for accessibility */
-    @media (prefers-reduced-motion: reduce){
-      *{animation:none !important;transition:none !important}
-    }
-  </style>
-</head>
-<body>
-  <div class="app">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="profile-section">
-        <div class="photo">
-            <img class="photo-img" src="./logo.webp" alt="">
+      .modal-close:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: var(--text);
+        transform: scale(1.1);
+      }
+
+      .modal-body {
+        padding: 1.5rem 2rem 2rem;
+      }
+
+      .project-detail-section {
+        margin-bottom: 2rem;
+      }
+
+      .project-detail-section:last-child {
+        margin-bottom: 0;
+      }
+
+      .detail-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--accent);
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .detail-content {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.8rem;
+      }
+
+      .tech-pill {
+        padding: 0.4rem 0.8rem;
+        background: rgba(77, 208, 255, 0.1);
+        border: 1px solid rgba(77, 208, 255, 0.25);
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--accent);
+      }
+
+      .project-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .project-link {
+        padding: 0.5rem 1rem;
+        background: rgba(122, 241, 199, 0.1);
+        border: 1px solid rgba(122, 241, 199, 0.3);
+        border-radius: 8px;
+        color: var(--accent-2);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .project-link:hover {
+        background: rgba(122, 241, 199, 0.2);
+        transform: translateY(-1px);
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 768px) {
+        .app {
+          flex-direction: column;
+          height: 100vh;
+        }
+        .sidebar {
+          width: 100%;
+          height: auto;
+          max-height: 40vh;
+          border-right: none;
+          border-bottom: 1px solid rgba(77, 208, 255, 0.15);
+        }
+
+        .profile-section {
+          padding: 1rem;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          text-align: left;
+        }
+
+        .photo {
+          width: 80px;
+          height: 80px;
+          margin: 0;
+          flex-shrink: 0;
+          overflow: hidden;
+        }
+        .photo-img {
+          width: 80px;
+          height: 80px;
+          margin: 0;
+          object-fit: cover;
+        }
+
+        .profile-info {
+          flex: 1;
+        }
+        .name {
+          font-size: 1.1rem;
+        }
+        .role {
+          font-size: 0.85rem;
+        }
+
+        .contact-info {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.3rem;
+          font-size: 0.75rem;
+        }
+
+        .nav-section {
+          padding: 0.5rem 1rem;
+        }
+
+        .nav-links {
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+
+        .nav-link {
+          padding: 0.4rem 0.6rem;
+          font-size: 0.85rem;
+        }
+
+        .main-content {
+          padding: 1rem;
+          flex: 1;
+          overflow-y: auto;
+        
+        }
+
+        .grid-2,
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+        .section-title {
+          font-size: 1.5rem;
+        }
+
+        .summary-hero {
+          padding: 1.5rem;
+        }
+
+        .summary-title {
+          font-size: 1.8rem;
+        }
+
+        .summary-stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .modal-content {
+          margin: 1rem;
+          max-height: 85vh;
+        }
+
+        .modal-header {
+          padding: 1rem 1.5rem 0.8rem;
+        }
+
+        .modal-body {
+          padding: 1rem 1.5rem 1.5rem;
+        }
+
+        .project-links {
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-links {
+          justify-content: center;
+        }
+
+        .summary-stats {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Reduce motion for accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="profile-section">
+          <div class="photo">
+            <img class="photo-img" src="./logo.webp" alt="Amiya Kumar Das" />
+          </div>
+          <div class="profile-info">
+            <div class="name">AMIYA KUMAR DAS</div>
+            <div class="role">Web Developer</div>
+            <div class="contact-info">
+              <div class="contact-item">
+                📧 <a href="mailto:amiyadas708@gmail.com">Email</a>
+              </div>
+              <div class="contact-item">
+                📱 <a href="tel:+918144239716">Phone</a>
+              </div>
+              <div class="contact-item">
+                🌐
+                <a href="https://github.com/amiyadas01" target="_blank"
+                  >GitHub</a
+                >
+              </div>
+              <div class="contact-item">
+                💼
+                <a href="https://www.linkedin.com/in/amiya-das-" target="_blank"
+                  >LinkedIn</a
+                >
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="profile-info">
-          <div class="name">AMIYA KUMAR DAS</div>
-          <div class="role">Full Stack Web Developer</div>
-          <div class="contact-info">
-            <div class="contact-item">📧 <a href="mailto:amiyadas708@gmail.com">Email</a></div>
-            <div class="contact-item">📱 <a href="tel:+918144239716">Phone</a></div>
-            <div class="contact-item">🌐 <a href="https://github.com/amiyadas01" target="_blank">GitHub</a></div>
-            <div class="contact-item">💼 <a href="https://www.linkedin.com/in/amiya-das-" target="_blank">LinkedIn</a></div>
+
+        <nav class="nav-section">
+          <div class="nav-links">
+            <div class="nav-link active" data-section="summary">Summary</div>
+            <div class="nav-link" data-section="skills">Skills</div>
+            <div class="nav-link" data-section="experience">Experience</div>
+            <div class="nav-link" data-section="projects">Projects</div>
+            <div class="nav-link" data-section="education">Education</div>
+            <div class="nav-link" data-section="achievements">Achievements</div>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Enhanced Summary Section -->
+        <section id="summary" class="content-section active">
+          <div class="summary-hero">
+            <h1 class="summary-title">Web Developer</h1>
+            <p class="summary-subtitle">
+              Crafting Digital Experiences with Modern Web Technologies
+            </p>
+
+            <div class="summary-content">
+              <div class="summary-highlight">
+                <strong>Passionate Web Developer</strong> with 8+ months of
+                hands-on professional experience in building modern, scalable
+                web applications. Specialized in
+                <strong>React ecosystem</strong> (Redux Toolkit, React Router,
+                Context API) and
+                <strong>Node.js backend development</strong> with a strong focus
+                on clean code architecture and optimal performance.
+              </div>
+
+              <div class="summary-highlight">
+                Demonstrated expertise in
+                <strong>comprehensive testing strategies</strong> (Jest, React
+                Testing Library),
+                <strong>secure authentication systems</strong> (Auth0, JWT,
+                RBAC), and <strong>API integration</strong> with Swagger
+                documentation. Proven track record of delivering smooth user
+                experiences, implementing performance optimizations, and
+                collaborating effectively in team environments.
+              </div>
+
+              <div class="summary-highlight">
+                Currently contributing to
+                <strong>RabbitM (SikhyaTantra)</strong> education platform,
+                where I architect frontend solutions, optimize rendering
+                performance, and ensure reliable deployments. Passionate about
+                continuous learning, mentoring peers, and staying updated with
+                the latest web technologies and best practices.
+              </div>
+            </div>
+
+            <div class="summary-stats">
+              <div class="stat-item">
+                <span class="stat-number">8+</span>
+                <span class="stat-label">Months Experience</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">15+</span>
+                <span class="stat-label">Technologies</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">3+</span>
+                <span class="stat-label">Major Projects</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-number">100%</span>
+                <span class="stat-label">Commitment</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="content-section">
+          <h2 class="section-title">Technical Skills</h2>
+          <div class="grid grid-2">
+            <div class="card skill-category">
+              <h3>Frontend</h3>
+              <p class="muted">
+                HTML, CSS, JavaScript, React.js,Next.js, Tailwind CSS, Redux
+                Toolkit, React Router, React Hook Form, Framer Motion, Context
+                API
+              </p>
+              <div>
+                <span class="pill">Accessibility</span>
+                <span class="pill">Performance</span>
+                <span class="pill">Responsive UI</span>
+              </div>
+            </div>
+            <div class="card skill-category">
+              <h3>Backend</h3>
+              <p class="muted">
+                Node.js, Express.js, REST APIs, Swagger / OpenAPI, JWT, Auth0,
+                OAuth, RBAC
+              </p>
+              <div>
+                <span class="pill">API Design</span>
+                <span class="pill">Security</span>
+                <span class="pill">Pagination</span>
+              </div>
+            </div>
+            <div class="card skill-category">
+              <h3>Testing</h3>
+              <p class="muted">Jest, React Testing Library, Cypress (basics)</p>
+              <p class="muted">ApiTesting :- Junit 5+ ,Rest Assured,Maven</p>
+              <div>
+                <span class="pill">Unit</span>
+                <span class="pill">Integration</span>
+                <span class="pill">E2E</span>
+              </div>
+            </div>
+            <div class="card skill-category">
+              <h3>Database & Tools</h3>
+              <p class="muted">
+                 Git, GitHub, npm, Postman, Swagger, Appwrite,Maven
+              </p>
+              <div>
+                <span class="pill">Schema Design</span>
+                <span class="pill">API Testing</span>
+                <span class="pill">Version Control</span>
+              </div>
+            </div>
+            <div class="card skill-category">
+              <h3>Currently Learning</h3>
+              <p class="muted">Java,SpringBoot,TypeScript,Docker,nginx,Azure</p>
+              <div>
+                <span class="pill">Continuous Learning</span>
+                <span class="pill">Upgrade</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="content-section">
+          <h2 class="section-title">Professional Experience</h2>
+          <div class="experience-item">
+            <h3>• Sarada PR Initiative — Junior Web Developer</h3>
+            <div class="muted">
+              Apr 2025 – Present • Project: RabbitM (SikhyaTantra)
+            </div>
+            <ul>
+              <li>
+                Built and maintained front-end features using React, React
+                Router, Redux Toolkit, Context API, and Tailwind CSS.
+              </li>
+              <li>
+                Integrated Swagger-documented APIs with Axios; implemented auth
+                with Auth0 / OAuth, RBAC, and JWT.
+              </li>
+              <li>
+                Developed a CSV bulk data uploader to streamline large-scale data
+                imports into the server, improving efficiency.
+              </li>
+              <li>
+                Wrote comprehensive frontend tests using Jest, React Testing Library,
+                and Cypress to ensure reliability and smooth UX.
+              </li>
+              <li>
+                Implemented backend API testing workflows with JUnit and Rest Assured
+                to validate endpoints and ensure contract compliance.
+              </li>
+              <li>
+                Optimized performance with memoization, code-splitting, and
+                smart rerenders.
+              </li>
+            </ul>
+          </div>
+        </section>
+        
+
+        <!-- Enhanced Projects Section -->
+        <section id="projects" class="content-section">
+          <h2 class="section-title">Key Projects</h2>
+          <div class="grid grid-2">
+            <div class="project-card" data-project="rabbitm">
+              <div class="project-header">
+                <h3 class="project-title">SikhyaTantra</h3>
+                <span class="project-status">In Production</span>
+              </div>
+              <p class="project-description">
+                Education platform features like secure auth (Auth0, JWT, RBAC),
+                listings, and event flows with React, Redux Toolkit, and API
+                services.
+              </p>
+              <div>
+                <span class="pill">React</span>
+                <span class="pill">Redux Toolkit</span>
+                <span class="pill">Auth0</span>
+                <span class="pill">Axios</span>
+                <span class="pill">Jest</span>
+                <span class="pill">RTL</span>
+                <span class="pill">Context API</span>
+                <span class="pill">Cypress</span>
+              </div>
+              <div class="view-details">View Details →</div>
+            </div>
+
+            <div class="project-card" data-project="csv-ai">
+              <div class="project-header">
+                <h3 class="project-title">CSV Processing & AI</h3>
+                <span class="project-status">Completed</span>
+              </div>
+              <p class="project-description">
+                Uploaded CSV data, validated and transformed it, and used
+                lightweight AI prompts to summarize insights. Smooth UI with
+                error handling.
+              </p>
+              <div>
+                <span class="pill">React</span>
+                <span class="pill">Node.js</span>
+                <span class="pill">Data Processing</span>
+              </div>
+              <div class="view-details">View Details →</div>
+            </div>
+
+            <div class="project-card" data-project="netflix-clone">
+              <div class="project-header">
+                <h3 class="project-title">Netflix Clone</h3>
+                <span class="project-status">Demo</span>
+              </div>
+              <p class="project-description">
+                TMDB-powered catalog with responsive UI, infinite scroll basics,
+                and clean component patterns. Built with Vite + React.
+              </p>
+              <div>
+                <span class="pill">Vite</span>
+                <span class="pill">TMDB API</span>
+                <span class="pill">React Router</span>
+              </div>
+              <div class="view-details">View Details →</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="content-section">
+          <h2 class="section-title">Education</h2>
+          <div class="education-card">
+            <h3>Bachelor of Computer Applications (BCA)</h3>
+            <div class="muted">SVM Autonomous College</div>
+          </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="content-section">
+          <h2 class="section-title">Achievements & Impact</h2>
+          <div class="grid grid-2">
+            <div class="achievement-card">
+              <h3>Performance & Quality</h3>
+              <ul>
+                <li>
+                  Improved page load and runtime performance with lean
+                  components and optimized renders.
+                </li>
+                <li>
+                  Streamlined API integrations with typed services and reusable
+                  utilities.
+                </li>
+                <li>
+                  Enhanced test coverage and stability on critical user flows.
+                </li>
+              </ul>
+            </div>
+            <div class="achievement-card">
+              <h3>Leadership & Growth</h3>
+              <ul>
+                <li>
+                  Led small feature squads, conducted code reviews, and mentored
+                  peers on React best practices.
+                </li>
+                <li>
+                  Proposed and shipped UX improvements that reduced user
+                  friction and support tickets.
+                </li>
+              </ul>
+            </div>
+          </div>
+        
+          <div class="grid grid-2" style="margin-top: 1rem">
+            <div class="achievement-card">
+              <h3>Soft Skills</h3>
+              <p class="muted">
+                Communication, teamwork, problem-solving, ownership, attention
+                to detail.
+              </p>
+            </div>
+            <div class="achievement-card">
+              <h3>Languages & Availability</h3>
+              <p class="muted">
+                English, Hindi, Odia • Open to full-time roles and internships
+                (remote or on-site).
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Project Detail Modal -->
+      <div class="modal-overlay" id="projectModal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="modalTitle">Project Details</h2>
+            <button class="modal-close" id="closeModal">×</button>
+          </div>
+          <div class="modal-body" id="modalBody">
+            <!-- Project details will be populated here -->
           </div>
         </div>
       </div>
-      
-      <nav class="nav-section">
-        <div class="nav-links">
-          <div class="nav-link active" data-section="summary">Summary</div>
-          <div class="nav-link" data-section="skills">Skills</div>
-          <div class="nav-link" data-section="experience">Experience</div>
-          <div class="nav-link" data-section="projects">Projects</div>
-          <div class="nav-link" data-section="education">Education</div>
-          <div class="nav-link" data-section="achievements">Achievements</div>
-        </div>
-      </nav>
-    </aside>
+    </div>
 
-    <!-- Main Content -->
-    <main class="main-content">
-      <!-- Summary Section -->
-      <section id="summary" class="content-section active">
-        <h2 class="section-title">Professional Summary</h2>
-        <div class="card">
-          <p class="summary-text">
-            <strong>Passionate Full Stack Web Developer</strong> with 8+ months of hands-on professional experience in building modern, scalable web applications. Specialized in <strong>React ecosystem</strong> (Redux Toolkit, React Router, Context API) and <strong>Node.js backend development</strong> with a strong focus on clean code architecture and optimal performance.
-          </p>
-          <p class="summary-text">
-            Demonstrated expertise in <strong>comprehensive testing strategies</strong> (Jest, React Testing Library), <strong>secure authentication systems</strong> (Auth0, JWT, RBAC), and <strong>API integration</strong> with Swagger documentation. Proven track record of delivering smooth user experiences, implementing performance optimizations, and collaborating effectively in team environments.
-          </p>
-          <p class="summary-text">
-            Currently contributing to <strong>RabbitM (SikhyaTantra)</strong> education platform, where I architect frontend solutions, optimize rendering performance, and ensure reliable deployments. Passionate about continuous learning, mentoring peers, and staying updated with the latest web technologies and best practices.
-          </p>
-        </div>
-      </section>
+    <script>
+      // Project data
+      const projectData = {
+        rabbitm: {
+          title: "SikhyaTantra",
+          status: "In Production",
+          overview:
+            "This project is currently under development and has not been launched yet. Once it is live, complete details and features will be shared here.",
+          features: [
+            "Role-Based Access Control (RBAC) for Admin, Teachers, and Students",
+            "Secure Authentication with Auth0 & JWT",
+            "Messaging Queue integration for async operations",
+            "React Services & Redux Toolkit for state management",
+            "Smooth navigation with React Router & Context API",
+          ],
+          challenges:
+            "Still in development phase, challenges and solutions will be documented post launch.",
+          technologies: [
+            "React",
+            "Redux Toolkit",
+            "Auth0",
+            "JWT",
+            "Axios",
+            "Messaging Queue",
+            "Swagger API",
+            "Postman",
+          ],
+          links: [{ label: "Private Repository (Not Public)", url: "Private Repository (Not Public)" }],
+        },
 
-      <!-- Skills Section -->
-      <section id="skills" class="content-section">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="grid grid-2">
-          <div class="card skill-category">
-            <h3>Frontend</h3>
-            <p class="muted">HTML, CSS, JavaScript, React, Tailwind CSS, Redux Toolkit, React Router, React Hook Form, Framer Motion, Context API</p>
-            <div>
-              <span class="pill">Accessibility</span>
-              <span class="pill">Performance</span>
-              <span class="pill">Responsive UI</span>
-            </div>
-          </div>
-          <div class="card skill-category">
-            <h3>Backend</h3>
-            <p class="muted">Node.js, Express.js, REST APIs, Swagger / OpenAPI, JWT, Auth0, OAuth, RBAC</p>
-            <div>
-              <span class="pill">API Design</span>
-              <span class="pill">Security</span>
-              <span class="pill">Pagination</span>
-            </div>
-          </div>
-          <div class="card skill-category">
-            <h3>Testing</h3>
-            <p class="muted">Jest, React Testing Library, Cypress (basics)</p>
-            <div>
-              <span class="pill">Unit</span>
-              <span class="pill">Integration</span>
-              <span class="pill">E2E</span>
-            </div>
-          </div>
-          <div class="card skill-category">
-            <h3>Database & Tools</h3>
-            <p class="muted">MongoDB, Mongoose, Git, GitHub, npm, Postman, Swagger, Appwrite</p>
-            <div>
-              <span class="pill">Schema Design</span>
-              <span class="pill">API Testing</span>
-              <span class="pill">Version Control</span>
-            </div>
-          </div>
-        </div>
-      </section>
+        "csv-ai": {
+          title: "CSV Bulk Processing with AI Insights",
+          status: "Completed",
+          overview:
+            "A tool to process large CSV files, upload bulk data to a database via backend APIs, and generate structured logs for error/success tracking.",
+          features: [
+            "Bulk data upload from CSV to database",
+            "Thread Pool implementation for handling concurrent processing",
+            "Detailed log files for success and error entries",
+            "Error tracking with backend APIs",
+            "AI-powered insights on processed data",
+          ],
+          challenges:
+            "The main challenge was optimizing bulk CSV uploads without server overload. Implementing thread pools solved concurrent requests, while log files ensured transparency.",
+          technologies: [
+            "GPT - 4o mini",
+            "Node.js",
+            "CSV Parser",
+            "Thread Pool",
+            "Logging System",
+          ],
+          links: [
+            { label: "Private Repository (Not Public)", url: "Private Repository (Not Public)" },
+          ],
+        },
 
-      <!-- Experience Section -->
-      <section id="experience" class="content-section">
-        <h2 class="section-title">Professional Experience</h2>
-        <div class="card experience-item">
-          <h3>• Sarada PR Initiative — Junior Web Developer</h3>
-          <div class="muted" style="margin-bottom:.8rem">Apr 2025 – Present • Project: RabbitM (SikhyaTantra)</div>
-          <ul>
-            <li>Built and maintained front-end features using React, React Router, Redux Toolkit, Context API, and Tailwind CSS.</li>
-            <li>Integrated Swagger-documented APIs with Axios; implemented auth with Auth0 / OAuth, RBAC, and JWT.</li>
-            <li>Collaborated on messaging-queue based flows and API contracts; improved reliability and UX.</li>
-            <li>Optimized performance with memoization, code-splitting, and smart rerenders.</li>
-          </ul>
-        </div>
-      </section>
+        "netflix-clone": {
+          title: "Netflix Clone",
+          status: "Demo",
+          overview:
+            "A Netflix-like movie listing platform built with TMDB API, providing an interactive UI for browsing trending, popular, and upcoming movies.",
+          features: [
+            "Movie search and listing from TMDB API",
+            "Responsive design with Tailwind CSS",
+            "Category-based filtering (Trending, Popular, Upcoming)",
+            "Demo authentication flow",
+          ],
+          challenges:
+            "Main challenge was efficiently fetching data from TMDB API and handling pagination without performance issues.",
+          technologies: ["Vite", "React", "Tailwind CSS", "TMDB API"],
+          links: [
+            {
+              label: "🌐 Live Demo",
+              url: "https://amiya-dass-2004-04-03.netlify.app/",
+            },
+          ],
+        },
+      };
 
-      <!-- Projects Section -->
-      <section id="projects" class="content-section">
-        <h2 class="section-title">Key Projects</h2>
-        <div class="grid grid-2">
-          <div class="card">
-            <h3>RabbitM App</h3>
-            <p class="muted">Education platform features like secure auth (Auth0, JWT, RBAC), listings, and event flows with React, Redux Toolkit, and API services.</p>
-            <div>
-              <span class="pill">React</span>
-              <span class="pill">Redux Toolkit</span>
-              <span class="pill">Auth0</span>
-              <span class="pill">Axios</span>
-            </div>
-          </div>
-          <div class="card">
-            <h3>CSV Processing & AI</h3>
-            <p class="muted">Uploaded CSV data, validated and transformed it, and used lightweight AI prompts to summarize insights. Smooth UI with error handling.</p>
-            <div>
-              <span class="pill">React</span>
-              <span class="pill">Node.js</span>
-              <span class="pill">Data Processing</span>
-            </div>
-          </div>
-          <div class="card">
-            <h3>Netflix Clone</h3>
-            <p class="muted">TMDB-powered catalog with responsive UI, infinite scroll basics, and clean component patterns. Built with Vite + React.</p>
-            <div>
-              <span class="pill">Vite</span>
-              <span class="pill">TMDB API</span>
-              <span class="pill">React Router</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      const navLinks = document.querySelectorAll(".nav-link");
+      const sections = document.querySelectorAll(".content-section");
+      const modal = document.getElementById("projectModal");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalBody = document.getElementById("modalBody");
 
-      <!-- Education Section -->
-      <section id="education" class="content-section">
-        <h2 class="section-title">Education</h2>
-        <div class="card">
-          <h3>Bachelor of Computer Applications (BCA)</h3>
-          <div class="muted">SVM Autonomous College</div>
-        </div>
-      </section>
+      function showSection(targetId, updateHistory = true) {
+        sections.forEach((s) => s.classList.remove("active"));
+        navLinks.forEach((l) => l.classList.remove("active"));
 
-      <!-- Achievements Section -->
-      <section id="achievements" class="content-section">
-        <h2 class="section-title">Achievements & Impact</h2>
-        <div class="grid grid-2">
-          <div class="card">
-            <h3>Performance & Quality</h3>
-            <ul>
-              <li>Improved page load and runtime performance with lean components and optimized renders.</li>
-              <li>Streamlined API integrations with typed services and reusable utilities.</li>
-              <li>Enhanced test coverage and stability on critical user flows.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Leadership & Growth</h3>
-            <ul>
-              <li>Led small feature squads, conducted code reviews, and mentored peers on React best practices.</li>
-              <li>Proposed and shipped UX improvements that reduced user friction and support tickets.</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="grid grid-2" style="margin-top:1rem">
-          <div class="card">
-            <h3>Soft Skills</h3>
-            <p class="muted">Communication, teamwork, problem-solving, ownership, attention to detail.</p>
-          </div>
-          <div class="card">
-            <h3>Languages & Availability</h3>
-            <p class="muted">English, Hindi, Odia • Open to full-time roles and internships (remote or on-site).</p>
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
+        document.getElementById(targetId)?.classList.add("active");
+        document
+          .querySelector(`[data-section="${targetId}"]`)
+          ?.classList.add("active");
 
-  <script>
-    // Simple section switching with minimal overhead
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('.content-section');
-    
-    function showSection(targetId) {
-      // Hide all sections
-      sections.forEach(section => {
-        section.classList.remove('active');
+        // Update URL only when needed
+        if (updateHistory) {
+          history.pushState({ section: targetId }, "", `?section=${targetId}`);
+        }
+      }
+
+      function getCurrentSection() {
+        const urlSection = new URLSearchParams(location.search).get("section");
+        const validSections = [
+          "summary",
+          "skills",
+          "experience",
+          "projects",
+          "education",
+          "achievements",
+        ];
+        return validSections.includes(urlSection) ? urlSection : "summary";
+      }
+
+      function openModal(projectKey) {
+        const p = projectData[projectKey];
+        if (!p) return;
+
+        modalTitle.textContent = p.title;
+        modalBody.innerHTML = `
+        <div class="project-detail-section">
+          <div class="detail-title">📋 Overview</div>
+          <div class="detail-content">${p.overview}</div>
+        </div>
+        <div class="project-detail-section">
+          <div class="detail-title">✨ Features</div>
+          <div class="detail-content"><ul>${p.features
+            .map((f) => `<li>${f}</li>`)
+            .join("")}</ul></div>
+        </div>
+        <div class="project-detail-section">
+          <div class="detail-title">🚧 Challenges</div>
+          <div class="detail-content">${p.challenges}</div>
+        </div>
+        <div class="project-detail-section">
+          <div class="detail-title">🛠️ Tech Stack</div>
+          <div class="tech-stack">${p.technologies
+            .map((t) => `<span class="tech-pill">${t}</span>`)
+            .join("")}</div>
+        </div>
+        <div class="project-detail-section">
+          <div class="detail-title">🔗 Links</div>
+          <div class="project-links">${p.links
+            .map(
+              (l) =>
+                `<a href="${l.url}" class="project-link" target="_blank">${l.label}</a>`
+            )
+            .join("")}</div>
+        </div>
+      `;
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        modal.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      // Initialize from URL
+      showSection(getCurrentSection(), false);
+
+      // Handle browser back/forward buttons
+      window.addEventListener("popstate", () => {
+        showSection(getCurrentSection(), false);
       });
-      
-      // Remove active from all nav links
-      navLinks.forEach(link => {
-        link.classList.remove('active');
+
+      // Event listeners
+      navLinks.forEach((link) => {
+        link.onclick = () => showSection(link.dataset.section);
       });
-      
-      // Show target section
-      const targetSection = document.getElementById(targetId);
-      if (targetSection) {
-        targetSection.classList.add('active');
-      }
-      
-      // Add active to clicked nav link
-      const activeLink = document.querySelector(`[data-section="${targetId}"]`);
-      if (activeLink) {
-        activeLink.classList.add('active');
-      }
-    }
-    
-    // Add click listeners
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        const sectionId = link.getAttribute('data-section');
-        showSection(sectionId);
+
+      document.querySelectorAll(".project-card").forEach((card) => {
+        card.onclick = () => openModal(card.dataset.project);
       });
-    });
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.ctrlKey || e.metaKey) return;
-      
-      const activeIndex = Array.from(navLinks).findIndex(link => link.classList.contains('active'));
-      let newIndex = activeIndex;
-      
-      if (e.key === 'ArrowDown' && activeIndex < navLinks.length - 1) {
-        newIndex = activeIndex + 1;
-        e.preventDefault();
-      } else if (e.key === 'ArrowUp' && activeIndex > 0) {
-        newIndex = activeIndex - 1;
-        e.preventDefault();
-      }
-      
-      if (newIndex !== activeIndex) {
-        const sectionId = navLinks[newIndex].getAttribute('data-section');
-        showSection(sectionId);
-      }
-    });
-  </script>
-</body>
+
+      document.getElementById("closeModal").onclick = closeModal;
+      modal.onclick = (e) => e.target === modal && closeModal();
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.classList.contains("active")) {
+          closeModal();
+          return;
+        }
+
+        if (e.ctrlKey || modal.classList.contains("active")) return;
+
+        const activeIndex = Array.from(navLinks).findIndex((l) =>
+          l.classList.contains("active")
+        );
+        let newIndex = activeIndex;
+        if (e.key === "ArrowDown" && activeIndex < navLinks.length - 1)
+          newIndex++;
+        if (e.key === "ArrowUp" && activeIndex > 0) newIndex--;
+        if (newIndex !== activeIndex) {
+          e.preventDefault();
+          showSection(navLinks[newIndex].dataset.section);
+        }
+      });
+    </script>
+  </body>
 </html>

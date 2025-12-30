@@ -29,13 +29,13 @@
   ],
   "screenshots": [
     {
-      "src": "logo.webp",
+      "src": "logo.png",
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide"
     },
     {
-      "src": "logo.webp",
+      "src": "logo.png",
       "sizes": "750x1334",
       "type": "image/png",
       "form_factor": "narrow"
@@ -49,7 +49,7 @@
       "url": "/section=resume",
       "icons": [
         {
-          "src": "/logo.webp",
+          "src": "/logo.png",
           "sizes": "192x192"
         }
       ]
@@ -61,7 +61,7 @@
       "url": "/?section=projects",
       "icons": [
         {
-          "src": "/logo.webp",
+          "src": "/logo.png",
           "sizes": "192x192"
         }
       ]

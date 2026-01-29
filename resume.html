@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume – Amiya Kumar Das | Download PDF Resume</title>
+    <meta name="title" content="Resume – Amiya Kumar Das | Download Professional Resume">
+    <meta name="description" content="Download the complete resume of Amiya Kumar Das, web developer with 8+ months experience in React, Redux, Node.js, and modern web technologies. PDF format available.">
+    <meta name="keywords" content="download resume, amiya kumar das resume, web developer cv, react developer resume pdf">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="Amiya Kumar Das">
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#0d2b3e">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Amiya Kumar Das">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.amiyakumardas.in/resume.html">
+    <meta property="og:title" content="Resume – Amiya Kumar Das | Download Professional Resume">
+    <meta property="og:description" content="Download professional resume showcasing web development experience, skills, and projects.">
+    <meta property="og:image" content="https://www.amiyakumardas.in/logo.webp">
+    <meta property="og:site_name" content="Amiya Kumar Das Portfolio">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.amiyakumardas.in/resume.html">
+    <meta property="twitter:title" content="Resume – Amiya Kumar Das | Download Professional Resume">
+    <meta property="twitter:description" content="Download complete resume with experience, skills, and project details.">
+    <meta property="twitter:image" content="https://www.amiyakumardas.in/logo.webp">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo.png">
+    <link rel="apple-touch-icon" href="/logo.png">
+
+    <!-- Google tag (gtag.js)  -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-MHBFD69104"
+    ></script>
+    <script src="/gtag.js"></script>
+    
+    <link rel="canonical" href="https://www.amiyakumardas.in/resume.html">
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body>
+    <div class="app">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="profile-section">
+          <div class="photo">
+            <img class="photo-img" src="./logo.webp" alt="Amiya Kumar Das" />
+          </div>
+          <div class="profile-info">
+            <h1 class="name">AMIYA KUMAR DAS</h1>
+            <h3 class="role">Web Developer</h3>
+            <div class="contact-info">
+              <div class="contact-item">
+                📧 <a href="mailto:amiyadas708@gmail.com">Email</a>
+              </div>
+              <div class="contact-item">
+                📱 <a href="tel:+918144239716">Phone</a>
+              </div>
+              <div class="contact-item">
+                🌐
+                <a href="https://github.com/amiyadas01" target="_blank"
+                  >GitHub</a
+                >
+              </div>
+              <div class="contact-item">
+                💼
+                <a href="https://www.linkedin.com/in/amiya-das-" target="_blank"
+                  >LinkedIn</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="nav-section">
+          <div class="nav-links">
+            <a href="index.html" class="nav-link">Summary</a>
+            <a href="skills.html" class="nav-link">Skills</a>
+            <a href="experience.html" class="nav-link">Experience</a>
+            <a href="projects.html" class="nav-link">Projects</a>
+            <a href="education.html" class="nav-link">Education</a>
+            <a href="achievements.html" class="nav-link">Achievements</a>
+            <a href="resume.html" class="nav-link active">Resume</a>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <section id="resume" class="content-section active">
+          <h2 class="section-title">Resume & Documents</h2>
+          <div class="grid grid-2">
+            <div class="card">
+              <h3>📄 My Resume</h3>
+              <p class="muted">
+                Download my complete resume with detailed experience, skills,
+                and achievements.
+              </p>
+              <button class="download-btn" onclick="downloadResume()">
+                <span class="download-icon">⬇️</span>
+                Download Resume (PDF)
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <div class="modal-overlay" id="downloadModal">
+        <div class="modal-content download-modal">
+          <div class="modal-header">
+            <h2 class="modal-title">📄 Download Resume</h2>
+            <button class="modal-close" id="closeDownloadModal">×</button>
+          </div>
+          <div class="modal-body">
+            <div class="download-confirmation">
+              <div class="download-icon-large">📥</div>
+              <h3>Ready to Download?</h3>
+              <p class="download-message">
+                You're about to download my resume PDF file.<br />
+                <strong>I promise this is a safe PDF file.</strong>
+              </p>
+              <div class="file-info">
+                <div class="file-detail">
+                  <span class="file-label">File:</span>
+                  <span class="file-value" id="text-wrap"
+                    >AMIYA-KUMAR-DAS-WEB-DEVELOPER-RESUME.pdf</span
+                  >
+                </div>
+                <div class="file-detail">
+                  <span class="file-label">Size:</span>
+                  <span class="file-value">~250 KB</span>
+                </div>
+                <div class="file-detail">
+                  <span class="file-label">Type:</span>
+                  <span class="file-value">PDF Document</span>
+                </div>
+              </div>
+              <div class="download-actions">
+                <button class="download-confirm-btn" id="confirmDownload">
+                  <span>⬇️</span> Download Resume
+                </button>
+                <button class="download-cancel-btn" id="cancelDownload">
+                  <span>❌</span> Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="assets/app.js"></script>
+  </body>
+</html>

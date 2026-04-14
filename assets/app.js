@@ -108,7 +108,7 @@ function closeDownloadModal() {
 
 function performDownload() {
   const link = document.createElement("a");
-  link.href = "./AMIYA-KUMAR-DAS-SOFTWARE-DEVELOPER-RESUME.pdf";
+  link.href = "./Amiya-Kumar-Das-Fullstack-Developer.pdf";
   link.download = "AMIYA_KUMAR_DAS_SOFTWARE_DEVELOPER_RESUME.pdf";
 
   // Add downloading state to confirm button

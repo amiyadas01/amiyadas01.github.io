@@ -633,15 +633,92 @@ li {
   color: var(--accent-2);
 }
 
-.project-status {
-  text-wrap: nowrap;
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  font-size: 0.7rem;
+.tagline {
+  font-size: 0.9rem;
+  color: var(--muted-color);
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+.learning-intro {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border-left: 4px solid var(--accent-color);
+  border-radius: 4px;
+  font-style: italic;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.learning-card {
+  position: relative;
+  padding-bottom: 3.5rem;
+}
+
+.status-badge {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  background: rgba(122, 241, 199, 0.15);
-  color: var(--accent-2);
-  border: 1px solid rgba(122, 241, 199, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  background: rgba(var(--accent-rgb), 0.1);
+  color: var(--accent-color);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+}
+
+.project-status.internship {
+  background: rgba(255, 193, 7, 0.1);
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+.project-status.in-progress {
+  background: rgba(23, 162, 184, 0.1);
+  color: #17a2b8;
+  border: 1px solid rgba(23, 162, 184, 0.2);
+}
+
+.project-status.production {
+  background: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+  border: 1px solid rgba(40, 167, 69, 0.2);
+}
+
+.project-bullets {
+  margin: 1rem 0;
+  padding-left: 1.2rem;
+  list-style-type: disc;
+}
+
+.project-bullets li {
+  font-size: 0.9rem;
+  color: var(--muted-color);
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.project-links-direct {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.project-link-direct {
+  font-size: 0.85rem;
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.project-link-direct:hover {
+  text-decoration: underline;
+  opacity: 0.8;
 }
 
 .project-description {

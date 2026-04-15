@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://amiyakumardas.in/sitemap.xml
+Sitemap: https://www.amiyakumardas.in/sitemap.xml
